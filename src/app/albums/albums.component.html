@@ -32,13 +32,13 @@
                     <span *ngIf=" album.id == statutPlay">Play</span>
                 </div>
                 <div class="card-body">
-                    <h5>{{album.title}}</h5>
+                    <a class="text-info" [routerLink]="['/album',album.id]" routerLinkActive="active">{{album.title}}</a>
                     <p>{{album.description}}</p>
                     <ul *ngIf="album.tags" class="list-inline">
                     <li class="list-inline-item" *ngFor="let tag of album.tags">
                         <span class="badge badge-info">{{tag}}</span>
                     </li>
-                    </ul>
+                </ul>
                     <div>
                         <button (click)="onSelect(album)" class="btn btn-info">en</button>
                         <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />
