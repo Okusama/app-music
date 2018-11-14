@@ -9,6 +9,7 @@ import { AlbumDetailsComponent } from './album-details/album-details.component';
 import { SearchComponent } from './search/search.component';
 import { DescriptionComponent } from './description/description.component';
 import { LoginComponent } from './login/login.component';
+import { Page404Component } from './page404/page404.component';
 
 @NgModule({
   declarations: [
@@ -17,7 +18,8 @@ import { LoginComponent } from './login/login.component';
     AlbumDetailsComponent,
     SearchComponent,
     DescriptionComponent,
-    LoginComponent
+    LoginComponent,
+    Page404Component
   ],
   imports: [
     BrowserModule,

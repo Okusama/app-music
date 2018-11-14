@@ -3,6 +3,7 @@ import { Routes, RouterModule } from '@angular/router';
 import {AlbumsComponent} from "./albums/albums.component";
 import {LoginComponent} from "./login/login.component";
 import {DescriptionComponent} from "./description/description.component";
+import {Page404Component} from "./page404/page404.component";
 
 const routes: Routes = [
     {
@@ -21,6 +22,14 @@ const routes: Routes = [
     {
         path: "album/:id",
         component: DescriptionComponent
+    },
+    {
+        path: "404",
+        component: Page404Component
+    },
+    {
+        path: "**",
+        redirectTo: "/404"
     }
 ];
 
