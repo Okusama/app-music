@@ -1,0 +1,28 @@
+<div *ngIf="album; else basicBlock" class="card">
+    <img class="card-img-top" src="{{album.url}}" alt="Group Music">
+    <div class="card-body">
+        <h5 class="card-title">{{album.name}}</h5>
+        <p class="card-text">{{album.title}}</p>
+        <a href="#" (click)="play(album)" class="btn btn-primary">Play >> </a>
+    </div>
+    <ul *ngIf="songs; else songList" class="list-group">
+        <li *ngFor="let song of songs" class="list-group-item">{{song}}</li>
+    </ul>
+    <ng-template #songLIst>
+        <ul class="list-group">
+            <li class="list-group-item">No song</li>
+        </ul>
+    </ng-template>
+</div>
+<ng-template #basicBlock>
+        <div class="card">
+                <img class="card-img-top" src="./assets/images/default_image.png" alt="Group Music">
+                <div class="card-body">
+                    <h5 class="card-title">Title</h5>
+                    <p class="card-text">No album selected</p>
+                </div>
+                <ul class="list-group">
+                    <li class="list-group-item">No song</li>
+                </ul>
+        </div>
+</ng-template>
