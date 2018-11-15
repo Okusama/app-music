@@ -59,7 +59,6 @@ export class AlbumsComponent implements OnInit {
   }
 
   pageParent(event){
-      console.log(event);
     this.albums = this.albumService.paginate(event.start, event.end);
   }
 

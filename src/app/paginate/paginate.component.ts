@@ -25,6 +25,14 @@ export class PaginateComponent implements OnInit {
       this.maxPage = this.calcMaxPage();
   }
 
+    ngOnChanges(){
+        this.aS.sendCurrentNumberPage.subscribe( page => {
+            console.log(page);
+            this.currentPage = page;
+            this.calcNbAlbumPaginate(page);
+        });
+    }
+
     calcMaxPage():number[]{
       let nbItems = this.aS.getAlbums().length;
       let maxPerpage = this.numPerPage;
@@ -37,7 +45,7 @@ export class PaginateComponent implements OnInit {
     }
 
     calcNbAlbumPaginate(currentPage:number):{start:number, end:number}{
-        this.subscribeCurrentPage();
+      this.aS.currentPage(currentPage);
         this.currentPage = currentPage;
         this.begin = (currentPage - 1) * this.numPerPage;
         this.end = this.begin + this.numPerPage;
@@ -66,13 +74,6 @@ export class PaginateComponent implements OnInit {
 
     onChangePage(pagination){
         this.onChangePageEvent.emit(pagination);
-    }
-
-    subscribeCurrentPage(){
-        this.aS.sendCurrentNumberPage.subscribe( page => {
-            console.log(page);
-            this.currentPage = page;
-        });
     }
 
 }
