@@ -11,6 +11,7 @@ import { SearchComponent } from './search/search.component';
 import { DescriptionComponent } from './description/description.component';
 import { LoginComponent } from './login/login.component';
 import { Page404Component } from './page404/page404.component';
+import { PaginateComponent } from './paginate/paginate.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { Page404Component } from './page404/page404.component';
     SearchComponent,
     DescriptionComponent,
     LoginComponent,
-    Page404Component
+    Page404Component,
+    PaginateComponent
   ],
   imports: [
     BrowserModule,

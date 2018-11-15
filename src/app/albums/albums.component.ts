@@ -36,18 +36,15 @@ export class AlbumsComponent implements OnInit {
   statutPlay:string;
 
   constructor(private albumService: AlbumService) {
-    console.log(this.count());
   }
 
-  ngOnInit() {
-      this.getAlbums();
-      this.count();
-  }
+    ngOnInit() {
+        this.getAlbums();
+    }
 
-  getAlbums(){
-      //this.albums = this.albumService.paginate(1,3);
-      this.albums = this.albumService.getAlbums();
-  }
+    getAlbums(){
+        this.albums = this.albumService.paginate(0, 4);
+    }
 
   onSelect(album){
     this.selectedAlbum = this.albumService.getAlbum(album.id);
@@ -58,6 +55,18 @@ export class AlbumsComponent implements OnInit {
   }
 
   searchParent(event){
+      this.albums = event;
+  }
+
+  nextParent(event){
+    this.albums = event;
+  }
+
+  prevParent(event){
+      this.albums = event;
+  }
+
+  pageParent(event){
       this.albums = event;
   }
 

@@ -1,30 +1,12 @@
-<app-search [album]="searchAlbum" (onSearch)="searchParent($event)"></app-search>
+<app-search (onSearch)="searchParent($event)"></app-search>
 <div class="row content">
     <div class="col-sm-4">
         <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>    
     </div>
     <div class="col-sm-8">
-        <nav aria-label="Page navigation example">
-            <ul class="pagination justify-content-center">
-                <li class="page-item disabled">
-                    <a class="page-link" href="#" tabindex="-1">Previous</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">1</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">2</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">3</a>
-                </li>
-                <li class="page-item">
-                    <a class="page-link" href="#">Next</a>
-                </li>
-            </ul>
-        </nav>
+        <app-paginate  (onNext)="nextParent($event)" (onPrev)="prevParent($event)" (onPage)="pageParent($event)"></app-paginate>
             <h1>{{ titlePage }}</h1>
-            <ul *ngIf="albums" class="list-unstyled" [@loadAlbum]="this.count()">
+            <ul *ngIf="albums" class="list-unstyled" [@loadAlbum]="albums.length">
             <li class="list-item" *ngFor="let album of albums" style="position: relative;" [ngClass]="{'selected': album.id == statutPlay}" >
                 <div class="card">
                 <div class="card-header">
@@ -51,25 +33,6 @@
                 </div>
             </li>
             </ul>
-            <nav aria-label="Page navigation example">
-                <ul class="pagination justify-content-center">
-                    <li class="page-item disabled">
-                        <a class="page-link" href="#" tabindex="-1">Previous</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">1</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">2</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">3</a>
-                    </li>
-                    <li class="page-item">
-                        <a class="page-link" href="#">Next</a>
-                    </li>
-                </ul>
-            </nav>
     </div>
 </div>
 

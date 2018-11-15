@@ -7,6 +7,11 @@ import { ALBUMS, ALBUM_LISTS } from "./mock-albums";
 })
 export class AlbumService {
 
+    numPerPage:number = 4;
+    currentPage:number = 1;
+    begin:number = 0;
+    end:number = 0;
+
   constructor() { }
 
   getAlbums():Album[]{
@@ -25,6 +30,17 @@ export class AlbumService {
       return ALBUMS.sort(
           (a, b) => { return b.duration - a.duration }
       ).slice(start, end);
+  }
+
+  getCurrentPage():number{
+      return this.currentPage;
+  }
+
+  calcNbAlbumPaginate(currentPage:number):Album[]{
+      this.currentPage = currentPage;
+      this.begin = (currentPage - 1) * this.numPerPage;
+      this.end = this.begin + this.numPerPage;
+      return this.paginate(this.begin, this.end);
   }
 
   search(word:string):Album[]{
