@@ -24,8 +24,8 @@
             </ul>
         </nav>
             <h1>{{ titlePage }}</h1>
-            <ul *ngIf="albums" class="list-unstyled">
-            <li class="list-item" *ngFor="let album of albums" [ngClass]="{'selected': album.id == statutPlay}">
+            <ul *ngIf="albums" class="list-unstyled" [@loadAlbum]="this.count()">
+            <li class="list-item" *ngFor="let album of albums" style="position: relative;" [ngClass]="{'selected': album.id == statutPlay}" >
                 <div class="card">
                 <div class="card-header">
                     {{album.name}}
@@ -35,10 +35,10 @@
                     <a class="text-info" [routerLink]="['/album',album.id]" routerLinkActive="active">{{album.title}}</a>
                     <p>{{album.description}}</p>
                     <ul *ngIf="album.tags" class="list-inline">
-                    <li class="list-inline-item" *ngFor="let tag of album.tags">
-                        <span class="badge badge-info">{{tag}}</span>
-                    </li>
-                </ul>
+                        <li class="list-inline-item" *ngFor="let tag of album.tags">
+                            <span class="badge badge-info">{{tag}}</span>
+                        </li>
+                    </ul>
                     <div>
                         <button (click)="onSelect(album)" class="btn btn-info">en</button>
                         <img class="glyph-icon" src="./assets/svg/si-glyph-heart.svg" />

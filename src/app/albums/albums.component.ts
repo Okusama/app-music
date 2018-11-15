@@ -1,11 +1,32 @@
 import { Component, OnInit } from '@angular/core';
+import {trigger, state, style, animate, transition, query, stagger} from "@angular/animations";
 import { Album } from "../album";
 import {AlbumService} from "../album.service";
 
 @Component({
   selector: 'app-albums',
   templateUrl: './albums.component.html',
-  styleUrls: ['./albums.component.scss']
+  styleUrls: ['./albums.component.scss'],
+    animations: [
+        trigger("loadAlbum",[
+            transition("* => *",[
+                query(":enter", [
+                    style({
+                        left:"-50%",
+                        opacity: "0"
+                    }),
+                    stagger(500,[
+                        animate(600, 
+                            style({
+                                transform: "translateX(50%)",
+                                opacity: "1"
+                            })
+                        )
+                    ]),
+                ]),
+            ])
+        ])
+    ]
 })
 export class AlbumsComponent implements OnInit {
 
@@ -20,6 +41,7 @@ export class AlbumsComponent implements OnInit {
 
   ngOnInit() {
       this.getAlbums();
+      this.count();
   }
 
   getAlbums(){

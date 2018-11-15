@@ -7,13 +7,13 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
           <ul class="navbar-nav mr-auto">
-              <li class="nav-item active">
-                  <a class="nav-link" href="#">Home
+              <li class="nav-item">
+                  <a class="nav-link" href="#" routerLink="/albums" routerLinkActive #rlaHome="routerLinkActive" [@buttonAnimate]="rlaHome.isActive ? 'open' : 'close'">Home
                       <span class="sr-only">(current)</span>
                   </a>
               </li>
-              <li class="nav-item active">
-                  <a class="nav-link" routerLink="/login" routerLinkActive="active">Se connecter
+              <li class="nav-item">
+                  <a class="nav-link" href="#" routerLink="/login" routerLinkActive #rlaLogin="routerLinkActive" [@buttonAnimate]="rlaLogin.isActive ? 'open' : 'close'">Se connecter
                       <span class="sr-only" >(current)</span>
                   </a>
               </li>
