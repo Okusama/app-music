@@ -30,13 +30,14 @@ export class PaginateComponent implements OnInit {
       let maxPerpage = this.numPerPage;
       let maxPage = Math.ceil(nbItems/maxPerpage);
       let array = [];
-      for(let i = 1; i<=maxPage; i++){
+      for(let i = 1; i <= maxPage; i++){
           array.push(i);
       }
       return array;
     }
 
     calcNbAlbumPaginate(currentPage:number):{start:number, end:number}{
+        this.subscribeCurrentPage();
         this.currentPage = currentPage;
         this.begin = (currentPage - 1) * this.numPerPage;
         this.end = this.begin + this.numPerPage;
@@ -65,6 +66,13 @@ export class PaginateComponent implements OnInit {
 
     onChangePage(pagination){
         this.onChangePageEvent.emit(pagination);
+    }
+
+    subscribeCurrentPage(){
+        this.aS.sendCurrentNumberPage.subscribe( page => {
+            console.log(page);
+            this.currentPage = page;
+        });
     }
 
 }
