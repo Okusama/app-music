@@ -23,16 +23,11 @@ export class PaginateComponent implements OnInit {
 
   ngOnInit() {
       this.maxPage = this.calcMaxPage();
+      this.aS.sendCurrentNumberPage.subscribe( page => {
+          this.currentPage = page;
+      });
   }
-
-    ngOnChanges(){
-        this.aS.sendCurrentNumberPage.subscribe( page => {
-            console.log(page);
-            this.currentPage = page;
-            this.calcNbAlbumPaginate(page);
-        });
-    }
-
+  
     calcMaxPage():number[]{
       let nbItems = this.aS.getAlbums().length;
       let maxPerpage = this.numPerPage;
