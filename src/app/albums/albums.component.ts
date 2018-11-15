@@ -16,7 +16,7 @@ import {AlbumService} from "../album.service";
                         opacity: "0"
                     }),
                     stagger(500,[
-                        animate(600, 
+                        animate("3s ease",
                             style({
                                 transform: "translateX(50%)",
                                 opacity: "1"
