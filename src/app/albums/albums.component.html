@@ -4,7 +4,7 @@
         <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>    
     </div>
     <div class="col-sm-8">
-        <app-paginate  (onNext)="nextParent($event)" (onPrev)="prevParent($event)" (onPage)="pageParent($event)"></app-paginate>
+        <app-paginate  (onChangePageEvent)="pageParent($event)"></app-paginate>
             <h1>{{ titlePage }}</h1>
             <ul *ngIf="albums" class="list-unstyled" [@loadAlbum]="albums.length">
             <li class="list-item" *ngFor="let album of albums" style="position: relative;" [ngClass]="{'selected': album.id == statutPlay}" >

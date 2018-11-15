@@ -9,11 +9,13 @@ import {AlbumService} from "../album.service";
 })
 export class PaginateComponent implements OnInit {
 
-    @Output() onNext: EventEmitter<Album[]> = new EventEmitter();
-    @Output() onPrev: EventEmitter<Album[]> = new EventEmitter();
-    @Output() onPage: EventEmitter<Album[]> = new EventEmitter();
+    @Output() onChangePageEvent: EventEmitter<{start:number, end:number}> = new EventEmitter();
 
     maxPage:number[] = [];
+    numPerPage:number = 4;
+    currentPage:number = 1;
+    begin:number = 0;
+    end:number = 0;
 
   constructor(private aS: AlbumService) {
 
@@ -21,12 +23,11 @@ export class PaginateComponent implements OnInit {
 
   ngOnInit() {
       this.maxPage = this.calcMaxPage();
-      console.log(this.maxPage);
   }
 
     calcMaxPage():number[]{
       let nbItems = this.aS.getAlbums().length;
-      let maxPerpage = this.aS.numPerPage;
+      let maxPerpage = this.numPerPage;
       let maxPage = Math.ceil(nbItems/maxPerpage);
       let array = [];
       for(let i = 1; i<=maxPage; i++){
@@ -35,24 +36,35 @@ export class PaginateComponent implements OnInit {
       return array;
     }
 
+    calcNbAlbumPaginate(currentPage:number):{start:number, end:number}{
+        this.currentPage = currentPage;
+        this.begin = (currentPage - 1) * this.numPerPage;
+        this.end = this.begin + this.numPerPage;
+        return {start :this.begin, end: this.end};
+    }
+
     onClickPrev(){
-        let newCurrentPage = this.aS.getCurrentPage() - 1;
+        let newCurrentPage = this.currentPage - 1;
         if (newCurrentPage < 0) {
             newCurrentPage = this.maxPage.length;
         }
-        this.onPrev.emit(this.aS.calcNbAlbumPaginate(newCurrentPage));
+        this.onChangePage(this.calcNbAlbumPaginate(newCurrentPage));
     }
 
     onClickNext(){
-        let newCurrentPage = this.aS.getCurrentPage() + 1;
+        let newCurrentPage = this.currentPage + 1;
         if (newCurrentPage > this.maxPage.length) {
             newCurrentPage = 1;
         }
-        this.onNext.emit(this.aS.calcNbAlbumPaginate(newCurrentPage));
+        this.onChangePage(this.calcNbAlbumPaginate(newCurrentPage));
     }
 
-    onClickPage(numPage){
-        this.onPage.emit(this.aS.calcNbAlbumPaginate(numPage));
+    onClickPage(page){
+        this.onChangePage(this.calcNbAlbumPaginate(page));
+    }
+
+    onChangePage(pagination){
+        this.onChangePageEvent.emit(pagination);
     }
 
 }

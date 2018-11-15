@@ -58,16 +58,9 @@ export class AlbumsComponent implements OnInit {
       this.albums = event;
   }
 
-  nextParent(event){
-    this.albums = event;
-  }
-
-  prevParent(event){
-      this.albums = event;
-  }
-
   pageParent(event){
-      this.albums = event;
+      console.log(event);
+    this.albums = this.albumService.paginate(event.start, event.end);
   }
 
   count():number{
