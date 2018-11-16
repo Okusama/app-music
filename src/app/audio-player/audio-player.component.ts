@@ -32,9 +32,9 @@ export class AudioPlayerComponent implements OnInit {
 
   calcDuration(){
       this.count.pipe(
-          take(120),
+          take(this.duration / 60),
       ).subscribe( x => {
-          this.ratio = 120 * (x/100);
+          this.ratio = (this.duration / 60) * (x/100);
       });
   }
 
