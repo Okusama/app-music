@@ -52,6 +52,7 @@ export class AlbumsComponent implements OnInit {
 
   playParent(event){
     this.statutPlay = event.id;
+    this.albumService.switchOn(event);
   }
 
   searchParent(event){

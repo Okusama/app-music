@@ -9,6 +9,7 @@ import { ALBUMS, ALBUM_LISTS } from "./mock-albums";
 export class AlbumService {
 
     sendCurrentNumberPage = new Subject<number>();
+    subjectAlbum = new Subject<Album>();
 
   constructor() { }
 
@@ -42,6 +43,15 @@ export class AlbumService {
          }
       });
       return response;
+  }
+
+  switchOn(album:Album){
+      return this.subjectAlbum.next(album);
+  }
+
+
+  switchOff(){
+    this.subjectAlbum.complete();
   }
 
 }

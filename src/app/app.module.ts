@@ -12,6 +12,7 @@ import { DescriptionComponent } from './description/description.component';
 import { LoginComponent } from './login/login.component';
 import { Page404Component } from './page404/page404.component';
 import { PaginateComponent } from './paginate/paginate.component';
+import { AudioPlayerComponent } from './audio-player/audio-player.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +23,8 @@ import { PaginateComponent } from './paginate/paginate.component';
     DescriptionComponent,
     LoginComponent,
     Page404Component,
-    PaginateComponent
+    PaginateComponent,
+    AudioPlayerComponent
   ],
   imports: [
     BrowserModule,
