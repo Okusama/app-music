@@ -27,7 +27,7 @@ export class PaginateComponent implements OnInit {
           this.currentPage = page;
       });
   }
-  
+
     calcMaxPage():number[]{
       let nbItems = this.aS.getAlbums().length;
       let maxPerpage = this.numPerPage;
