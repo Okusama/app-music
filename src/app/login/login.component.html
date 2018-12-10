@@ -1,12 +1,12 @@
-<form>
+<form #f="ngForm" (ngSubmit)="onSubmit(f)">
     <div class="form-group">
         <label for="email">Email</label>
-        <input class="form-control" id="email" name="email" type="text" placeholder="Enter email"/>
+        <input class="form-control" id="email" name="email" ngModel type="text" placeholder="Enter email" #first="ngModel"/>
         <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
     </div>
     <div class="form-group">
         <label for="password">Password</label>
-        <input class="form-control" id="password" name="password" type="password" placeholder="Password"/>
+        <input class="form-control" ngModel id="password" name="password" type="password" placeholder="Password"/>
     </div>
     <div class="form-group form-check">
         <input class="form-check-input" type="checkbox" id="checkme"/>

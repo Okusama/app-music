@@ -12,11 +12,23 @@
                       <span class="sr-only">(current)</span>
                   </a>
               </li>
-              <li class="nav-item">
+              <li *ngIf="isLogin === false; else elseNav" class="nav-item">
                   <a class="nav-link" href="#" routerLink="/login" routerLinkActive #rlaLogin="routerLinkActive" [@buttonAnimate]="rlaLogin.isActive ? 'open' : 'close'">Se connecter
                       <span class="sr-only">(current)</span>
                   </a>
               </li>
+              <ng-template #elseNav>
+                  <li>
+                      <a class="nav-link" href="#" (click)="this.handleLogoutClick()">Se déconnecter
+                          <span class="sr-only">(current)</span>
+                      </a>
+                  </li>
+                  <li>
+                      <a class="nav-link" href="#" routerLink="/dashboard" routerLinkActive #rlaDashBoard="routerLinkActive" [@buttonAnimate]="rlaDashBoard.isActive ? 'open' : 'close'">DashBoard
+                          <span class="sr-only">(current)</span>
+                      </a>
+                  </li>
+              </ng-template>
           </ul>
       </div>
       <span id="timer">{{hour}} h {{min}} min {{sec}} sec</span>

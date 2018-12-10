@@ -4,6 +4,8 @@ import {AlbumsComponent} from "./albums/albums.component";
 import {LoginComponent} from "./login/login.component";
 import {DescriptionComponent} from "./description/description.component";
 import {Page404Component} from "./page404/page404.component";
+import {DashboardComponent} from './dashboard/dashboard.component';
+import {GuardService} from './GuardService';
 
 const routes: Routes = [
     {
@@ -22,6 +24,10 @@ const routes: Routes = [
     {
         path: "album/:id",
         component: DescriptionComponent
+    },
+    {
+      path: "dashboard", canActivate: [GuardService],
+      component: DashboardComponent
     },
     {
         path: "404",
