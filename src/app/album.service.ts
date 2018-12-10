@@ -3,7 +3,7 @@ import { Subject, Observable } from "rxjs/index";
 import {Album, List} from "./album";
 import { ALBUMS, ALBUM_LISTS } from "./mock-albums";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
-import {map} from "rxjs/operators"
+import {map} from "rxjs/operators";
 import * as _ from "lodash";
 
 const httpOptions = {
@@ -61,7 +61,7 @@ export class AlbumService {
 
   search(word:string): Observable<Album[]> {
       return this.getAlbums().pipe(map( albums => {
-          let response :Album[]= [];
+          const response: Album[] = [];
           _.forEach(albums, (v,k) => {
               if (v.name.includes(word)) {
                   response.push(v);
@@ -71,16 +71,32 @@ export class AlbumService {
       }));
   }
 
-  switchOn(album:Album){
-      return this.subjectAlbum.next(album);
+  switchOn(album: Album) {
+      album.status = "on";
+      console.log(album.id);
+      this.http.put<void>(this.albumsUrl+`/${album.id}/.json`, album).subscribe(
+          e => e,
+          error => console.warn(error),
+          () => {
+              this.subjectAlbum.next(album);
+          }
+      )
   }
 
 
-  switchOff(){
-    this.subjectAlbum.complete();
-  }
+    switchOff(album: Album){
+        album.status = "off";
+        console.log(album.id);
+        this.http.put<void>(this.albumsUrl + `/${album.id}/.json`, album).subscribe(
+            e => e,
+            error => console.warn(error),
+            () => {
+                this.subjectAlbum.complete();
+            }
+        )
+    }
 
-    count(): Observable<number>{
+    count(): Observable<number> {
         return this.getAlbums().pipe(map(albums => {
             return albums.length;
         }));

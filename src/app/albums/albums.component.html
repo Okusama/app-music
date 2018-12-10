@@ -1,7 +1,7 @@
 <app-search (onSearch)="searchParent($event)"></app-search>
 <div class="row content">
     <div class="col-sm-4">
-        <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)"></app-album-details>    
+        <app-album-details [album]="selectedAlbum" (onPlay)="playParent($event)" (onStop)="stopParent($event)"></app-album-details>
     </div>
     <div class="col-sm-8">
         <app-paginate  (onChangePageEvent)="pageParent($event)"></app-paginate>

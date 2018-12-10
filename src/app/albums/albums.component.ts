@@ -47,12 +47,15 @@ export class AlbumsComponent implements OnInit {
 
    getAlbums() {
         this.albumService.paginate(0, 4).subscribe(albums => {
+            console.log(albums);
             this.albums = albums;
         });
     }
 
-  onSelect(album){
+  onSelect(album) {
+      console.log(album.id);
     this.albumService.getAlbum(album.id).subscribe( albums => {
+        console.log(albums)
         this.selectedAlbum = albums;
     });
   }
@@ -60,6 +63,11 @@ export class AlbumsComponent implements OnInit {
   playParent(event){
     this.statutPlay = event.id;
     this.albumService.switchOn(event);
+  }
+
+  stopParent(event){
+      this.statutPlay = "";
+      this.albumService.switchOff(event);
   }
 
   searchParent(event){

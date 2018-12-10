@@ -10,6 +10,7 @@ import {AlbumService} from "../album.service";
 export class AlbumDetailsComponent implements OnInit {
 
   @Output() onPlay: EventEmitter<Album> = new EventEmitter();
+  @Output() onStop: EventEmitter<Album> = new EventEmitter();
 
   @Input() album:Album;
   list: List[] = [];
@@ -28,12 +29,17 @@ export class AlbumDetailsComponent implements OnInit {
 
   getAlbumList(){
       if(this.album){
+          console.log(this.album);
           this.songs = this.albumService.getAlbumList(this.album.id).list;
       }
   }
 
   play(album: Album){
     this.onPlay.emit(album);
+  }
+
+  stop(album: Album) {
+    this.onStop.emit(album);
   }
 
 }
