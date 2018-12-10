@@ -18,8 +18,11 @@ export class SearchComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSubmit(form:NgForm){
-      this.onSearch.emit(this.albumService.search(form.value["word"]));
+  onSubmit(form: NgForm) {
+      this.albumService.search(form.value["word"]).subscribe( albums => {
+          console.log(albums);
+          this.onSearch.emit(albums);
+      });
   }
 
 }

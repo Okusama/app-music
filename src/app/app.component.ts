@@ -40,7 +40,6 @@ export class AppComponent {
   sec:number = 0;
   min:number = 0;
   hour: number = 0;
-  test: string: "";
 
   ngOnInit(){
       this.count.pipe(
