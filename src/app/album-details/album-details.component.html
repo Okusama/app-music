@@ -3,7 +3,10 @@
     <div class="card-body">
         <h5 class="card-title">{{album.name}}</h5>
         <p class="card-text">{{album.title}}</p>
-        <a (click)="play(album)" class="btn btn-primary">Play >> </a>
+        <a *ngIf="album.status == 'off'; else elseButton" (click)="play(album)" class="btn btn-primary">Play >> </a>
+        <ng-template #elseButton>
+            <a (click)="stop(album)" class="btn btn-danger">Stop</a>
+        </ng-template>
     </div>
     <ul *ngIf="songs; else songList" class="list-group">
         <li *ngFor="let song of songs" class="list-group-item">{{song}}</li>

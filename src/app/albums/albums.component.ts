@@ -36,18 +36,28 @@ export class AlbumsComponent implements OnInit {
   statutPlay:string;
 
   constructor(private albumService: AlbumService) {
+      this.albumService.getAlbums().subscribe(
+          albums => {console.log(albums)}
+      )
   }
 
-    ngOnInit() {
+   ngOnInit() {
         this.getAlbums();
     }
 
-    getAlbums(){
-        this.albums = this.albumService.paginate(0, 4);
+   getAlbums() {
+        this.albumService.paginate(0, 4).subscribe(albums => {
+            console.log(albums);
+            this.albums = albums;
+        });
     }
 
-  onSelect(album){
-    this.selectedAlbum = this.albumService.getAlbum(album.id);
+  onSelect(album) {
+      console.log(album.id);
+    this.albumService.getAlbum(album.id).subscribe( albums => {
+        console.log(albums)
+        this.selectedAlbum = albums;
+    });
   }
 
   playParent(event){
@@ -55,16 +65,19 @@ export class AlbumsComponent implements OnInit {
     this.albumService.switchOn(event);
   }
 
+  stopParent(event){
+      this.statutPlay = "";
+      this.albumService.switchOff(event);
+  }
+
   searchParent(event){
       this.albums = event;
   }
 
   pageParent(event){
-    this.albums = this.albumService.paginate(event.start, event.end);
-  }
-
-  count():number{
-      return this.albumService.getAlbums().length;
+    this.albumService.paginate(event.start, event.end).subscribe( albums => {
+        this.albums = albums;
+    });
   }
 
 }

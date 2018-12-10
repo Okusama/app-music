@@ -11,32 +11,36 @@ export class PaginateComponent implements OnInit {
 
     @Output() onChangePageEvent: EventEmitter<{start:number, end:number}> = new EventEmitter();
 
-    maxPage:number[] = [];
-    numPerPage:number = 4;
-    currentPage:number = 1;
-    begin:number = 0;
-    end:number = 0;
+    maxPage: number[] = [];
+    numPerPage: number = 4;
+    currentPage: number = 1;
+    begin: number = 0;
+    end: number = 0;
+    nbItems: number = 1;
 
   constructor(private aS: AlbumService) {
 
   }
 
   ngOnInit() {
-      this.maxPage = this.calcMaxPage();
+      this.calcMaxPage();
       this.aS.sendCurrentNumberPage.subscribe( page => {
           this.currentPage = page;
       });
   }
 
-    calcMaxPage():number[]{
-      let nbItems = this.aS.getAlbums().length;
-      let maxPerpage = this.numPerPage;
-      let maxPage = Math.ceil(nbItems/maxPerpage);
-      let array = [];
-      for(let i = 1; i <= maxPage; i++){
-          array.push(i);
-      }
-      return array;
+    calcMaxPage(): void {
+        this.aS.count().subscribe(count => {
+            let nbItems = count;
+            let maxPerpage = this.numPerPage;
+            let maxPage = Math.ceil(nbItems/maxPerpage);
+            let array = [];
+            for(let i = 1; i <= maxPage; i++){
+                array.push(i);
+            }
+            this.maxPage = array;
+        });
+
     }
 
     calcNbAlbumPaginate(currentPage:number):{start:number, end:number}{
