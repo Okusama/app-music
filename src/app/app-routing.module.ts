@@ -6,6 +6,7 @@ import {DescriptionComponent} from "./description/description.component";
 import {Page404Component} from "./page404/page404.component";
 import {DashboardComponent} from './dashboard/dashboard.component';
 import {GuardService} from './GuardService';
+import {AlbumComponent} from './admin/album/album.component';
 
 const routes: Routes = [
     {
@@ -27,7 +28,7 @@ const routes: Routes = [
     },
     {
         path: "admin",
-        component: DashboardComponent,
+        component: AlbumComponent,
         canActivate: [GuardService]
     },
     {

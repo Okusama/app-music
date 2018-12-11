@@ -11,7 +11,6 @@ import { SearchComponent } from './search/search.component';
 import { DescriptionComponent } from './description/description.component';
 import { LoginComponent } from './login/login.component';
 import { Page404Component } from './page404/page404.component';
-import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import {HttpClientModule} from '@angular/common/http';
 import * as firebase from 'firebase';
@@ -43,14 +42,14 @@ firebase.initializeApp(firebaseConfig);
     DashboardComponent
   ],
   imports: [
-    BrowserModule,
-    AppRoutingModule,
-      FormsModule,
-      BrowserAnimationsModule,
-      HttpClientModule,
-      AdminModule,
-      ShareModule
-  ]
+        BrowserModule,
+        ShareModule,
+        AdminModule,
+        AppRoutingModule,
+        FormsModule,
+        BrowserAnimationsModule,
+        HttpClientModule
+  ],
   providers: [],
   bootstrap: [AppComponent]
 })
