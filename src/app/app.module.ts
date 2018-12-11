@@ -14,6 +14,20 @@ import { Page404Component } from './page404/page404.component';
 import { PaginateComponent } from './paginate/paginate.component';
 import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import {HttpClientModule} from '@angular/common/http';
+import * as firebase from 'firebase';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import {AdminModule} from './admin/admin.module';
+
+// Initialize Firebase
+const firebaseConfig = {
+    apiKey: "AIzaSyDrXKxNH2hXPV1U8IdwMuOWXOgcgUqgx7U",
+    authDomain: "app-music-712e7.firebaseapp.com",
+    databaseURL: "https://app-music-712e7.firebaseio.com",
+    projectId: "app-music-712e7",
+    storageBucket: "app-music-712e7.appspot.com",
+    messagingSenderId: "661265087257"
+};
+firebase.initializeApp(firebaseConfig);
 
 @NgModule({
   declarations: [
@@ -25,16 +39,19 @@ import {HttpClientModule} from '@angular/common/http';
     LoginComponent,
     Page404Component,
     PaginateComponent,
-    AudioPlayerComponent
+    AudioPlayerComponent,
+    DashboardComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
       FormsModule,
       BrowserAnimationsModule,
-      HttpClientModule
+      HttpClientModule,
+      AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
 })
-export class AppModule { }
+export class AppModule {
+}
