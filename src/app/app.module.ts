@@ -17,6 +17,7 @@ import {HttpClientModule} from '@angular/common/http';
 import * as firebase from 'firebase';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import {AdminModule} from './admin/admin.module';
+import {ShareModule} from './share/share.module';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -38,7 +39,6 @@ firebase.initializeApp(firebaseConfig);
     DescriptionComponent,
     LoginComponent,
     Page404Component,
-    PaginateComponent,
     AudioPlayerComponent,
     DashboardComponent
   ],
@@ -48,8 +48,9 @@ firebase.initializeApp(firebaseConfig);
       FormsModule,
       BrowserAnimationsModule,
       HttpClientModule,
-      AdminModule
-  ],
+      AdminModule,
+      ShareModule
+  ]
   providers: [],
   bootstrap: [AppComponent]
 })

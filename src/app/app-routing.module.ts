@@ -26,7 +26,7 @@ const routes: Routes = [
         component: DescriptionComponent
     },
     {
-        path: "dashboard",
+        path: "admin",
         component: DashboardComponent,
         canActivate: [GuardService]
     },

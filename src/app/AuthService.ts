@@ -38,7 +38,7 @@ export class AuthService {
 
     logIn(isLogin: boolean) {
         this.authenticated(isLogin);
-        this.router.navigate(["/dashboard"]);
+        this.router.navigate(["/admin"]);
     }
 
     isLogin(): boolean{

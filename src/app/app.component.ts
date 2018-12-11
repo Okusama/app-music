@@ -3,6 +3,7 @@ import { interval, Observable } from "rxjs/index";
 import { trigger, state, style, animate, transition } from "@angular/animations";
 import {take} from "rxjs/internal/operators";
 import {AuthService} from './AuthService';
+import {AlbumService} from './album.service';
 
 @Component({
   selector: 'app-root',
@@ -42,7 +43,7 @@ export class AppComponent {
   min:number = 0;
   hour:number = 0;
 
-  constructor(public aS: AuthService) {}
+  constructor(public aS: AuthService, private alS: AlbumService) {}
 
   ngOnInit() {
       this.count.pipe(
@@ -53,6 +54,10 @@ export class AppComponent {
           this.sec = x - (this.hour * 3600) - (this.min * 60);
       });
 
+  }
+
+  clear(){
+        this.alS.clear();
   }
 
 }
