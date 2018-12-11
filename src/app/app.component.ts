@@ -41,7 +41,6 @@ export class AppComponent {
   sec:number = 0;
   min:number = 0;
   hour:number = 0;
-  isLogin:boolean = false;
 
   constructor(public aS: AuthService) {}
 

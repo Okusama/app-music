@@ -16,6 +16,7 @@ import { AudioPlayerComponent } from './audio-player/audio-player.component';
 import {HttpClientModule} from '@angular/common/http';
 import * as firebase from 'firebase';
 import { DashboardComponent } from './dashboard/dashboard.component';
+import {AdminModule} from './admin/admin.module';
 
 // Initialize Firebase
 const firebaseConfig = {
@@ -46,7 +47,8 @@ firebase.initializeApp(firebaseConfig);
     AppRoutingModule,
       FormsModule,
       BrowserAnimationsModule,
-      HttpClientModule
+      HttpClientModule,
+      AdminModule
   ],
   providers: [],
   bootstrap: [AppComponent]
