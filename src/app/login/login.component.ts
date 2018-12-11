@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
     this.aS.auth(f.value.email, f.value.password).then(res => {
       console.log(res);
-      this.aS.authenticated(true);
+      this.aS.logIn(true);
     }).catch( err => {
       console.warn(err);
     });

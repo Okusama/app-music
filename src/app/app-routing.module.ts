@@ -26,8 +26,9 @@ const routes: Routes = [
         component: DescriptionComponent
     },
     {
-      path: "dashboard", canActivate: [GuardService],
-      component: DashboardComponent
+        path: "dashboard",
+        component: DashboardComponent,
+        canActivate: [GuardService]
     },
     {
         path: "404",

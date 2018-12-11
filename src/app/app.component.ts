@@ -43,7 +43,7 @@ export class AppComponent {
   hour:number = 0;
   isLogin:boolean = false;
 
-  constructor(private aS: AuthService) {}
+  constructor(public aS: AuthService) {}
 
   ngOnInit() {
       this.count.pipe(
@@ -54,16 +54,6 @@ export class AppComponent {
           this.sec = x - (this.hour * 3600) - (this.min * 60);
       });
 
-      this.aS.authState.subscribe( isLogin => {
-          console.log(isLogin);
-          this.isLogin = isLogin;
-      });
-
-
-  }
-
-  handleLogoutClick() {
-      this.aS.logOut();
   }
 
 }

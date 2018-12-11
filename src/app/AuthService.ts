@@ -10,31 +10,39 @@ import {Subject} from 'rxjs/index';
 })
 export class AuthService {
 
-    authState = new Subject<boolean>();
+    authState: boolean;
 
-    constructor(private router:Router){
-
-        firebase.auth().onAuthStateChanged(user => {
+    constructor(private router: Router) {
+        firebase.auth().onAuthStateChanged( (user) => {
             if (user) {
-                this.authState.next(true);
+                this.authState = true;
             } else {
-                this.authState.next(false);
+                this.authState = false;
             }
         });
-
     }
 
     auth(email: string, password: string): Promise<any>{
         return firebase.auth().signInWithEmailAndPassword(email, password);
     }
 
-    logOut() {
-        this.authState.next(false);
-        //this.router.navigate(["/"]);
+    logOut(isLogin: boolean) {
+        this.authenticated(isLogin);
+        firebase.auth().signOut();
+        this.router.navigate(["/albums"]);
     }
 
-    authenticated(isLogin: boolean){
-        return this.authState.next(isLogin);
+    authenticated(isLogin: boolean) {
+        return this.authState = isLogin;
+    }
+
+    logIn(isLogin: boolean) {
+        this.authenticated(isLogin);
+        this.router.navigate(["/dashboard"]);
+    }
+
+    isLogin(): boolean{
+        return this.authState === true;
     }
 
 }

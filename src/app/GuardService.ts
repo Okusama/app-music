@@ -3,24 +3,23 @@ import {ActivatedRouteSnapshot, CanActivate, RouterStateSnapshot, Router} from '
 import {AuthService} from './AuthService';
 
 @Injectable({
-    providedIn: "root"
+    providedIn: 'root'
 })
 export class GuardService implements CanActivate {
 
     constructor(private aS: AuthService, private router: Router) {}
 
     canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | boolean{
-
-        this.aS.authState.subscribe(isLogin => {
-            console.log(isLogin);
-            if (isLogin) {
-                return true;
-            } else {
-                this.router.navigate(["/albums"],{
-                    queryParams: { messageError: 'Error authentification'}
-                });
-            }
-        });
+        console.log("canActivate");
+        if (this.aS.isLogin()) {
+            console.log("log");
+            return true;
+        } else {
+            console.log("redirect");
+            this.router.navigate(['/login'], {
+                queryParams: { messageError: 'Error authentification'}
+            });
+        }
     }
 
 }
