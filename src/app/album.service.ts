@@ -5,6 +5,7 @@ import { ALBUMS, ALBUM_LISTS } from "./mock-albums";
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {map} from "rxjs/operators";
 import * as _ from "lodash";
+import * as firebase from "firebase/app"
 
 const httpOptions = {
     headers: new HttpHeaders({
@@ -28,8 +29,19 @@ export class AlbumService {
 
     getAlbums(): Observable<Album[]> {
         return this.http.get<Album[]>(this.albumsUrl + '/.json', httpOptions).pipe(
-            map(albums => _.values(albums)),
             map(albums => {
+                let response = [];
+                console.log(albums);
+                _.forEach(albums, (v, k) => {
+                    if(v){
+                        v.id = k;
+                        response.push(v);
+                    }
+                });
+                return response;
+            }),
+            map(albums => {
+                console.log(albums);
                 return albums.sort(
                     (a, b) => {
                         return b.duration - a.duration
@@ -105,6 +117,21 @@ export class AlbumService {
         }));
     }
 
+    addAlbum(album: Album): Observable<void>{
+        return this.http.post(this.albumsUrl + "/.json", album);
+    }
+
+    updateAlbum(album: Album): Observable<void>{
+        return this.http.put(this.albumsUrl + `/${album.id}/.json`, album);
+    }
+
+    deleteAlbum(album: Album): Observable<void>{
+        if (album.hasOwnProperty("urlRef")){
+            firebase.storage().ref().child(album.urlRef).delete().then()
+        }
+        return this.http.delete(this.albumsUrl + `/${album.id}/.json`);
+    }
+
     clear() {
         const url = "https://projet-angular-cee02.firebaseio.com/albums";
         const album = {};
@@ -118,5 +145,11 @@ export class AlbumService {
             )
         }
     }
+
+    uploadAlbumImage(fileToUpload: any): firebase.storage.UploadTask{
+        let storagRef = firebase.storage().ref();
+        return storagRef.child(fileToUpload.name).put(fileToUpload);
+    }
+
 }
 

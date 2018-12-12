@@ -9,6 +9,7 @@ export class Album {
     url?:string;
     tags?:Array<string>;
     like?:string;
+    urlRef?:string;
 }
 
 export class List {

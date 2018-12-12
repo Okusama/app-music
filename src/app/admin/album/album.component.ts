@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {AlbumService} from '../../album.service';
 import {Album} from '../../album';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-album',
@@ -11,12 +12,10 @@ export class AlbumComponent implements OnInit {
 
     albums: Album[] = [];
 
-    constructor(private albumService: AlbumService) { }
+    constructor(private albumService: AlbumService, private router: Router) { }
 
     ngOnInit() {
-
         this.getAlbums();
-
     }
 
     getAlbums() {
@@ -29,6 +28,16 @@ export class AlbumComponent implements OnInit {
     pageParent(event){
         this.albumService.paginate(event.start, event.end).subscribe( albums => {
             this.albums = albums;
+        });
+    }
+
+    deleteAlbum(id: string){
+        this.albumService.deleteAlbum(id).subscribe(album => {
+            console.log(album);
+        }, error => {
+            console.error(error);
+        }, () => {
+            this.getAlbums();
         });
     }
 

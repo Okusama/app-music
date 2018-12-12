@@ -7,19 +7,25 @@ import {AuthService} from './AuthService';
 })
 export class GuardService implements CanActivate {
 
-    constructor(private aS: AuthService, private router: Router) {}
+    constructor(private aS: AuthService, private router: Router) {
+    }
 
-    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | boolean{
+    canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): any | boolean {
         console.log("canActivate");
         if (this.aS.isLogin()) {
             console.log("log");
             return true;
-        } else {
-            console.log("redirect");
-            this.router.navigate(['/login'], {
-                queryParams: { messageError: 'Error authentification'}
-            });
         }
+        return this.aS.isCurrentUserObservable().onAuthStateChanged((user) => {
+            if (user === null) {
+                this.router.navigate(['/login'], {
+                    queryParams: {messageError: 'Error authentification'}
+                });
+            } else {
+                this.router.navigate(['/admin'], {
+                    queryParams: {messageError: 'Success'}
+                });
+            }
+        });
     }
-
 }

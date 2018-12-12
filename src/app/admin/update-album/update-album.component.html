@@ -1,7 +1,4 @@
 <form [formGroup]="albumForm" (ngSubmit)="this.onSubmit()">
-    <div>
-        <input #fileInput type="file">
-    </div>
   <div class="form-group">
     <label for="name">Nom:</label>
     <input formControlName="name" type="text" class="form-control" id="name" aria-describedby="emailHelp" placeholder="Entrer le nom de l'artiste">

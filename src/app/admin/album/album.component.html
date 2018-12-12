@@ -14,11 +14,11 @@
   <tbody>
   <tr *ngFor="let album of albums">
     <th scope="row">{{album.id}}</th>
-    <td><button class="btn btn-default">update</button></td>
+    <td><button class="btn btn-default" routerLink="/admin/update/{{album.id}}">update</button></td>
     <td>{{album.name}}</td>
     <td>{{album.title}}</td>
     <td>{{album.duration}}</td>
-    <td><button class="btn btn-danger">delete</button></td>
+    <td><button class="btn btn-danger" (click)="this.deleteAlbum(album)">delete</button></td>
   </tr>
   </tbody>
 </table>

@@ -10,20 +10,21 @@ import {Subject} from 'rxjs/index';
 })
 export class AuthService {
 
-    authState: boolean;
+    private authState: boolean = false;
 
     constructor(private router: Router) {
         firebase.auth().onAuthStateChanged( (user) => {
             if (user) {
                 this.authState = true;
             } else {
-                this.authState = false;
+                this.authState = null;
             }
         });
     }
 
     auth(email: string, password: string): Promise<any>{
         return firebase.auth().signInWithEmailAndPassword(email, password);
+
     }
 
     logOut(isLogin: boolean) {
@@ -42,7 +43,11 @@ export class AuthService {
     }
 
     isLogin(): boolean{
-        return this.authState === true;
+        return this.authState == true;
+    }
+
+    isCurrentUserObservable(){
+        return firebase.auth();
     }
 
 }

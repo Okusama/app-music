@@ -39,7 +39,7 @@ firebase.initializeApp(firebaseConfig);
     LoginComponent,
     Page404Component,
     AudioPlayerComponent,
-    DashboardComponent
+    DashboardComponent,
   ],
   imports: [
         BrowserModule,
