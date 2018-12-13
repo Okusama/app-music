@@ -1,0 +1,7 @@
+<table class="table table-dark">
+  <tr *ngFor="let music of musics" [appMusicTag]="music.color">
+    <td>{{music.id}}</td>
+    <td>{{music.name}}</td>
+    <td><button class="btn btn-dark" (click)="setColor(music.id)">tag</button></td>
+  </tr>
+</table>

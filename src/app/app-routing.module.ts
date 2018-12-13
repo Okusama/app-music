@@ -4,7 +4,6 @@ import {AlbumsComponent} from "./albums/albums.component";
 import {LoginComponent} from "./login/login.component";
 import {DescriptionComponent} from "./description/description.component";
 import {Page404Component} from "./page404/page404.component";
-import {DashboardComponent} from './dashboard/dashboard.component';
 import {GuardService} from './GuardService';
 import {AlbumComponent} from './admin/album/album.component';
 
@@ -30,6 +29,10 @@ const routes: Routes = [
         path: "admin",
         component: AlbumComponent,
         canActivate: [GuardService]
+    },
+    {
+        path: "playlist",
+        loadChildren: "./playlist/playlist.module#PlaylistModule"
     },
     {
         path: "404",

@@ -117,15 +117,15 @@ export class AlbumService {
         }));
     }
 
-    addAlbum(album: Album): Observable<void>{
+    addAlbum(album: Album): Observable<Object>{
         return this.http.post(this.albumsUrl + "/.json", album);
     }
 
-    updateAlbum(album: Album): Observable<void>{
+    updateAlbum(album: Album): Observable<Object>{
         return this.http.put(this.albumsUrl + `/${album.id}/.json`, album);
     }
 
-    deleteAlbum(album: Album): Observable<void>{
+    deleteAlbum(album: Album): Observable<Object>{
         if (album.hasOwnProperty("urlRef")){
             firebase.storage().ref().child(album.urlRef).delete().then()
         }

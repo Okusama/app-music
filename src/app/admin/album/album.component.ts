@@ -11,6 +11,8 @@ import {Router} from '@angular/router';
 export class AlbumComponent implements OnInit {
 
     albums: Album[] = [];
+    showModal: boolean = false;
+    album;
 
     constructor(private albumService: AlbumService, private router: Router) { }
 
@@ -31,14 +33,28 @@ export class AlbumComponent implements OnInit {
         });
     }
 
-    deleteAlbum(id: string){
-        this.albumService.deleteAlbum(id).subscribe(album => {
+    deleteAlbum(album: Album): void {
+        this.showModal = true;
+        this.album = album;
+    }
+
+    choice($event) {
+        this.showModal = $event.showModal;
+    }
+
+    yes() {
+        this.showModal = false;
+        this.albumService.deleteAlbum(this.album).subscribe(album => {
             console.log(album);
         }, error => {
             console.error(error);
         }, () => {
             this.getAlbums();
         });
+    }
+
+    no() {
+        this.showModal = false;
     }
 
 }

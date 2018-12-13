@@ -6,6 +6,7 @@ import { AddAlbumComponent } from './add-album/add-album.component';
 import {Routes, RouterModule} from '@angular/router';
 import {GuardService} from '../GuardService';
 import { UpdateAlbumComponent } from './update-album/update-album.component';
+import { ModalDialogComponent } from './modal-dialog/modal-dialog.component';
 
 const routes: Routes = [
     {
@@ -23,7 +24,8 @@ const routes: Routes = [
   declarations: [
       AlbumComponent,
       AddAlbumComponent,
-      UpdateAlbumComponent
+      UpdateAlbumComponent,
+      ModalDialogComponent
   ],
   imports: [
     CommonModule,
